@@ -1,33 +1,35 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
+
+//DucPABG_D19PTIT
 
 int out (string a, string b)
 {
-    int n, m;
-    n = a.size(), m = b.size();
-    int LCS[n+1][m+1];
-    int res = 0;
-    for (int i=0; i<=n; i++){
-        for (int j=0; j<=m; j++){
-            if (i==0 || j==0)
-                LCS[i][j] = 0;
-            else if (a[i-1] == b[j-1])
-                LCS[i][j] = LCS[i-1][j-1] + 1;
+    int n = a.size()+1, m = b.size()+1;
+    int LCS[n][m];
+    memset (LCS, 0, sizeof(LCS));
+    
+    for (int i=1; i<n; i++)
+    {
+        for (int j=1; j<m; j++)
+        {
+            if (a[i-1]== b[j-1])
+                LCS[i][j] = max (LCS[i-1][j-1]+1, max(LCS[i][j-1], LCS[i-1][j]));
             else
-                LCS[i][j] = max (LCS[i][j-1], LCS[i-1][j]);
-            if (LCS[i][j] > res)
-                res = LCS[i][j];
+                LCS[i][j] =  max(LCS[i][j-1], LCS[i-1][j]);
         }
     }
-    return res;
+    
+    return LCS[n-1][m-1];
 }
 
-int main()
+int main ()
 {
-    int t; cin>>t;
-    while(t--){
-        string a, b;
-        cin>>a>>b;
-        cout << out(a,b) << endl;
+    int t; cin >> t;
+    while (t--)
+    {
+        string a, b; cin >> a >> b;
+        cout << out (a, b) << endl;
     }
+    return 0;
 }
