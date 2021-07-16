@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//DucPABG_D19PTIT
+//DucPABG_D19PTIT.
 
 int out (string a, string b)
 {
